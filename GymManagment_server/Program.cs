@@ -19,8 +19,7 @@ namespace GymManagment_server
 
             //Add Database to dependency injection
             builder.Services.AddDbContext<BenDBContext>(
-                    options => options.UseSqlServer(builder.Services.AddDbContext<BenDBContext>(
-                   options => options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Initial Catalog = GymManagment_server; User ID = TaskAdminLogin; Password = Petel123; Trusted_Connection = True; MultipleActiveResultSets = true"));));
+                   options => options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Initial Catalog = GymManagment_server; User ID = TaskAdminLogin; Password = Petel123; Trusted_Connection = True; MultipleActiveResultSets = true"));
 
             #endregion
             #region for debugginh UI

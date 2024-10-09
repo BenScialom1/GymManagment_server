@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GymManagment_server.Models;
+using GymManagment_server.DTO;
 namespace GymManagment_server.Controllers
 {
     [Route("api/[controller]")]
@@ -17,5 +18,28 @@ namespace GymManagment_server.Controllers
             this.context = context;
             this.webHostEnvironment = env;
         }
-    }
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] DTO.UserDTO userDTO)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                Models.User modelUser = new User()
+                {
+                    Username = userDTO.Username,
+                    Password = userDTO.Password,
+                    Age = userDTO.Age,
+                    Gender = userDTO.Gender,
+                };
+                context.Users.Add(modelUser);
+                context.SaveChanges();
+                DTO.UserDTO dtoUser = new DTO.UserDTO(modelUser);
+                return Ok(dtoUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    } 
 }
