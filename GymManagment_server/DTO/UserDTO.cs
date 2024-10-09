@@ -1,4 +1,6 @@
-﻿namespace GymManagment_server.DTO
+﻿
+namespace GymManagment_server.DTO
+
 {
     public class UserDTO
     {
