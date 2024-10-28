@@ -26,30 +26,19 @@ namespace GymManagment_server
             builder.Services.AddDbContext<BenDBContext>(
                    options => options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Initial Catalog = GymManagment_server; User ID = TaskAdminLogin; Password = Petel123; Trusted_Connection = True; MultipleActiveResultSets = true"));
 
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            builder.Services.AddSwaggerGen();
 
+            builder.Services.AddEndpointsApiExplorer();
             var app = builder.Build();
 
-            #region for debugginh UI
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            #endregion
-
-
-
-            #region for debugginh UI
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-            #endregion
-            #region Add Session
-            app.UseSession(); //In order to enable session management
-            #endregion 
-            // Add services to the container.
-
+           
             
                    
 
@@ -61,7 +50,7 @@ namespace GymManagment_server
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSession();
             app.UseAuthorization();
 
 
