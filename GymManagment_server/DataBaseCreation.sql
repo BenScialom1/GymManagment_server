@@ -11,39 +11,48 @@ Go
 Use GymManagment_server
 Go
 
-CREATE TABLE Users(
-Username Nvarchar(100),
-[Password] Nvarchar(100) PRIMARY KEY,
+Create table Users(
+Username Nvarchar(50),
+Email Nvarchar(50) Unique Not null,
+[Password] Nvarchar(50) ,
+Id int PRIMARY KEY Identity,
 Age int,
-Gender nvarchar(100),
---GymId int Foreign key,
+Adress Nvarchar(100) Not null,
+Difficulty Nvarchar(50) Not null,
+Gender nvarchar(50),
+IsManager bit Not Null Default 0
+
 );
 
 
-CREATE TABLE GYMS(
-[Name] nvarchar(100),
+Create table Gyms(
+[Name] nvarchar(50),
 [GymId] int PRIMARY KEY IDENTITY,
-[Level] int,);
+[Level] int,
+Adress Nvarchar(100) Not null,
+Price int Not null,
+PhoneNumber Nvarchar(15) Not null,
+IsManager bit Foreign Key References Users(IsManager)
+);
 
 
-CREATE TABLE TRAINERS(
-[Name] nvarchar(100),
+Create table Trainers(
+[Name] nvarchar(50),
 TrainerId int PRIMARY KEY IDENTITY,
-NumOfClasses int,);
+[Description] Nvarchar(100) Not null,
+Class Nvarchar(50) Not null
+);
 
 
-CREATE TABLE CLASSES(
-[Name] nvarchar(100),
+Create table Classes(
+[Name] nvarchar(50),
 ClassId int PRIMARY KEY IDENTITY,
-DIFFICULTY INT,);
+DIFFICULTY INT,
+[Description] Nvarchar(100) Not null);
 
-CREATE TABLE TRAINERCLASSES(
-AssignmentId int PRIMARY KEY,
- Schedule NVARCHAR(100),
-[TrainerId] int,
-ClassId int,
-FOREIGN KEY (TrainerId) REFERENCES TRAINERS(TrainerId),
-FOREIGN KEY (ClassId) REFERENCES CLASSES(ClassId));
+Create table Comments(
+[Rank] int Not null,
+[Description] Nvarchar(150) Not null);
     
 CREATE LOGIN [TaskAdminLogin] WITH PASSWORD = 'Petel123';
 Go
