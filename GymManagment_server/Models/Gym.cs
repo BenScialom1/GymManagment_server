@@ -6,14 +6,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymManagment_server.Models;
 
-[Table("GYMS")]
 public partial class Gym
 {
-    [StringLength(100)]
+    [StringLength(50)]
     public string? Name { get; set; }
 
     [Key]
     public int GymId { get; set; }
 
     public int? Level { get; set; }
+
+    [StringLength(100)]
+    public string Address { get; set; } = null!;
+
+    public int Price { get; set; }
+
+    [StringLength(15)]
+    public string PhoneNumber { get; set; } = null!;
+
+    public int? GymManager { get; set; }
+
+    [InverseProperty("Gym")]
+    public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+
+    [ForeignKey("GymManager")]
+    [InverseProperty("Gyms")]
+    public virtual User? GymManagerNavigation { get; set; }
+
+    [InverseProperty("Gym")]
+    public virtual ICollection<Trainer> Trainers { get; set; } = new List<Trainer>();
 }
