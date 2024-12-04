@@ -18,6 +18,7 @@ namespace GymManagment_server.Controllers
             this.context = context;
             this.webHostEnvironment = env;
         }
+        [HttpPost("login")]
         public IActionResult Login([FromBody] DTO.Logininfo loginDto)
         {
             try
@@ -37,7 +38,7 @@ namespace GymManagment_server.Controllers
                 HttpContext.Session.SetString("loggedInUser", modelsUser.Email);
 
                 DTO.UserDTO dtoUser = new DTO.UserDTO(modelsUser);
-               
+
                 return Ok(dtoUser);
             }
             catch (Exception ex)
@@ -46,7 +47,7 @@ namespace GymManagment_server.Controllers
             }
 
         }
-
+        [HttpPost("register")]
         public IActionResult Register([FromBody] DTO.UserDTO userDto)
         {
             try
@@ -67,7 +68,7 @@ namespace GymManagment_server.Controllers
 
                 //User was added!
                 DTO.UserDTO dtoUser = new DTO.UserDTO(modelsUser);
-               
+
                 return Ok(dtoUser);
             }
             catch (Exception ex)

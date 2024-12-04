@@ -15,7 +15,7 @@ namespace GymManagment_server.DTO
         {
             this.Name = Name;
             this.TrainerId = trainer.TrainerId;
-            this.NumOfClasses = trainer.NumOfClasses;
+            //this.NumOfClasses = trainer.NumOfClasses;
         }
     }
 }

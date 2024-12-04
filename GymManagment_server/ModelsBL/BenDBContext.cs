@@ -1,14 +1,12 @@
 ﻿using GymManagment_server.Models;
-namespace GymManagment_server.ModelsBL
+using Microsoft.EntityFrameworkCore;
+namespace GymManagment_server.Models
 {
-    public class BenDBContext
+    public partial class BenDBContext:DbContext
     {
         public User GetUser(string email)
         {
-            return this.User.Where(u => u.Email == email)
-                                .Include(u => u.UserTasks)
-                                .ThenInclude(t => t.TaskComments)
-                                .FirstOrDefault();
+            return this.Users.Where(u => u.Email == email).FirstOrDefault();
         }
     }
 }
