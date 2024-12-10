@@ -52,7 +52,7 @@ namespace GymManagment_server
             app.UseHttpsRedirection();
             app.UseSession();
             app.UseAuthorization();
-
+            app.UseStaticFiles();
 
             app.MapControllers();
 
