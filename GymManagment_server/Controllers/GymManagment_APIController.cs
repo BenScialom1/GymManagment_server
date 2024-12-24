@@ -4,7 +4,7 @@ using GymManagment_server.Models;
 using GymManagment_server.DTO;
 namespace GymManagment_server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class GymManagment_APIController : ControllerBase
     {
