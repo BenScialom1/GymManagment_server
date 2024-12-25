@@ -57,9 +57,13 @@ namespace GymManagment_server.Controllers
                 //Get model user class from DB with matching email. 
                 Models.User modelsUser = new User()
                 {
-                    Username = userDto.Username,
                     Email = userDto.Email,
+                    Username = userDto.Username,
                     Password = userDto.Password,
+                    BirthDate=userDto.BirthDate,
+                    Address=userDto.Address,
+                    Difficulty=userDto.Difficulty,
+                    GenderId=userDto.GenderId,
                     IsManager = userDto.IsManager
                 };
 
