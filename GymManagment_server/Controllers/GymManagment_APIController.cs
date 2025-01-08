@@ -73,7 +73,7 @@ namespace GymManagment_server.Controllers
                 //User was added!
                 DTO.UserDTO dtoUser = new DTO.UserDTO(modelsUser);
 
-                return Ok(dtoUser);
+                return Ok(dtoUser.Id);
             }
             catch (Exception ex)
             {
