@@ -82,45 +82,70 @@ namespace GymManagment_server.Controllers
             }
 
         }
-        [HttpPost("updateUser")]
-        public IActionResult UpdateUser([FromBody] ClassDTO.UserDTO userDto)
+
+        [HttpPost("GymRegister")]
+        public IActionResult GymRegister([FromBody] DTO.GymDTO gymDTO)
         {
             try
             {
-                //Check if who is logged in
-                string? userEmail = HttpContext.Session.GetString("loggedInUser");
-                if (string.IsNullOrEmpty(userEmail))
+                HttpContext.Session.Clear();
+                Models.Gym gymrgister = new Gym()
                 {
-                    return Unauthorized("User is not logged in");
-                }
-
-                //Get model user class from DB with matching email. 
-                Models.User? user = context.GetUser(userEmail);
-                //Clear the tracking of all objects to avoid double tracking
-                context.ChangeTracker.Clear();
-
-                //Check if the user that is logged in is the same user of the task
-                //this situation is ok only if the user is a manager
-                if (user == null || (user.IsManager == false && userDto.Id != user.Id))
-                {
-                    return Unauthorized("Non Manager User is trying to update a different user");
-                }
-
-                Models.User appUser = userDto.GetModels();
-
-                context.Entry(appUser).State = EntityState.Modified;
-
+                    Name = gymDTO.Name,
+                    Level = gymDTO.Level,
+                    Address = gymDTO.Address,
+                    Price = gymDTO.Price,
+                    PhoneNumber = gymDTO.PhoneNumber
+                };
+                context.Gyms.Add(gymrgister);
                 context.SaveChanges();
-
-                //Task was updated!
-                return Ok();
+                DTO.GymDTO dtoGym = new DTO.GymDTO(gymrgister);
+                return Ok(dtoGym.GymId);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
+        //[HttpPost("updateUser")]
+        //public IActionResult UpdateUser([FromBody] ClassDTO.UserDTO userDto)
+        //{
+        //    try
+        //    {
+        //        //Check if who is logged in
+        //        string? userEmail = HttpContext.Session.GetString("loggedInUser");
+        //        if (string.IsNullOrEmpty(userEmail))
+        //        {
+        //            return Unauthorized("User is not logged in");
+        //        }
+
+        //        //Get model user class from DB with matching email. 
+        //        Models.User? user = context.GetUser(userEmail);
+        //        //Clear the tracking of all objects to avoid double tracking
+        //        context.ChangeTracker.Clear();
+
+        //        //Check if the user that is logged in is the same user of the task
+        //        //this situation is ok only if the user is a manager
+        //        if (user == null || (user.IsManager == false && userDto.Id != user.Id))
+        //        {
+        //            return Unauthorized("Non Manager User is trying to update a different user");
+        //        }
+
+        //        Models.User appUser = userDto.GetModels();
+
+        //        context.Entry(appUser).State = EntityState.Modified;
+
+        //        context.SaveChanges();
+
+        //        //Task was updated!
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
 
     }
 } 

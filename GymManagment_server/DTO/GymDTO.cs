@@ -1,16 +1,34 @@
-﻿namespace GymManagment_server.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GymManagment_server.DTO
 {
     public class GymDTO
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
+
+        [Key]
         public int GymId { get; set; }
+
         public int? Level { get; set; }
-        public GymDTO() { }
+
+        [StringLength(100)]
+        public string Address { get; set; } = null!;
+
+        public int Price { get; set; }
+
+        [StringLength(15)]
+        public string PhoneNumber { get; set; } = null!;
+
+        public int? GymManager { get; set; }
         public GymDTO(Models.Gym gym) 
         {
             this.Name = Name;
             this.GymId=GymId;
             this.Level = Level;
+            this.Address = Address;
+            this.Price = Price;
+            this.PhoneNumber = PhoneNumber;
+            this.GymManager = GymManager;
         }
     }
 }
