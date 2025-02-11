@@ -69,6 +69,7 @@ Go
 
 INSERT INTO Users Values (N'Itamar1',N'Itamar12@gmail.com',N'Itamar123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Begginer',2,1)
 INSERT INTO Users Values(N'Admin',N'o@gmail.com',N'123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Expert',2,2)
+INSERT INTO Gyms Values(N'Itamarfittnes',1,N'Golda Meir 5 Hod Hasharon',150,N'054131478',1)
 INSERT INTO GYMS VALUES (N'Itamarfit',3,N'Golda Meir 5 Hod Hasharon',100,N'0504847514')
 insert into TRAINERS values(N'Ben',N'Ben is an excellent triner that specilice in yoga classes')
 insert into CLASSES values(N'Zumba',2,N'Zumba class is an intermidiate class that is a lot of fun')
