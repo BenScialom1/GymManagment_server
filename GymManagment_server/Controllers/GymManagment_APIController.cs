@@ -107,6 +107,19 @@ namespace GymManagment_server.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("getAllGyms")]
+        public async Task<ActionResult<List<Gym>>> GetAllGyms()
+        {
+            try
+            {
+                var gyms = await context.Gyms.ToListAsync();
+                return Ok(gyms);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
         //[HttpPost("updateUser")]
         //public IActionResult UpdateUser([FromBody] ClassDTO.UserDTO userDto)
         //{
