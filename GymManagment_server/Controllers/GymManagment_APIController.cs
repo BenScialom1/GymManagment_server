@@ -107,7 +107,7 @@ namespace GymManagment_server.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost("getAllGyms")]
+        [HttpGet("getAllGyms")]
         public async Task<ActionResult<List<Gym>>> GetAllGyms()
         {
             try
