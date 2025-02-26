@@ -120,46 +120,73 @@ namespace GymManagment_server.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        //[HttpPost("updateUser")]
-        //public IActionResult UpdateUser([FromBody] ClassDTO.UserDTO userDto)
-        //{
-        //    try
-        //    {
-        //        //Check if who is logged in
-        //        string? userEmail = HttpContext.Session.GetString("loggedInUser");
-        //        if (string.IsNullOrEmpty(userEmail))
-        //        {
-        //            return Unauthorized("User is not logged in");
-        //        }
 
-        //        //Get model user class from DB with matching email. 
-        //        Models.User? user = context.GetUser(userEmail);
-        //        //Clear the tracking of all objects to avoid double tracking
-        //        context.ChangeTracker.Clear();
+        [HttpPost("registerTrainer")]
+        public IActionResult RegisterTrainer([FromBody] DTO.TrainerDTO trainerDTO)
+        {
+            try
+            {
+                // Check if the referenced gym exists
+                var gym = context.Gyms.FirstOrDefault(g => g.GymId == trainerDTO.GymId);
+                if (gym == null)
+                {
+                    return BadRequest("The specified gym does not exist.");
+                }
 
-        //        //Check if the user that is logged in is the same user of the task
-        //        //this situation is ok only if the user is a manager
-        //        if (user == null || (user.IsManager == false && userDto.Id != user.Id))
-        //        {
-        //            return Unauthorized("Non Manager User is trying to update a different user");
-        //        }
+                // Create a new trainer entity
+                Models.Trainer trainer = new Trainer()
+                {
+                    Name = trainerDTO.Name,
+                    Description = trainerDTO.Description,
+                    GymId = trainerDTO.GymId
+                };
 
-        //        Models.User appUser = userDto.GetModels();
+                // Add the trainer to the database
+                context.Trainers.Add(trainer);
+                context.SaveChanges();
 
-        //        context.Entry(appUser).State = EntityState.Modified;
+                // Create a DTO to return
+                DTO.TrainerDTO dtoTrainer = new DTO.TrainerDTO(trainer);
 
-        //        context.SaveChanges();
+                // Return the newly created trainer's ID
+                return Ok(dtoTrainer.TrainerId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-        //        //Task was updated!
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
+        [HttpGet("getTrainersByGym/{gymId}")]
+        public async Task<ActionResult<List<Trainer>>> GetTrainersByGym(int gymId)
+        {
+            try
+            {
+                var trainers = await context.Trainers
+                    .Where(t => t.GymId == gymId)
+                    .ToListAsync();
 
-        //}
+                return Ok(trainers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
+        [HttpGet("getAllTrainers")]
+        public async Task<ActionResult<List<Trainer>>> GetAllTrainers()
+        {
+            try
+            {
+                var trainers = await context.Trainers.ToListAsync();
+                return Ok(trainers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 } 
 
