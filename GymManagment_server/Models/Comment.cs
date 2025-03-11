@@ -13,10 +13,19 @@ public partial class Comment
 
     public int UserId { get; set; }
 
+    public int GymId { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime Date { get; set; }
+
     public int Rank { get; set; }
 
     [StringLength(150)]
     public string Description { get; set; } = null!;
+
+    [ForeignKey("GymId")]
+    [InverseProperty("Comments")]
+    public virtual Gym Gym { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("Comments")]

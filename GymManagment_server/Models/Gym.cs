@@ -29,6 +29,9 @@ public partial class Gym
     [InverseProperty("Gym")]
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
+    [InverseProperty("Gym")]
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
     [ForeignKey("GymManager")]
     [InverseProperty("Gyms")]
     public virtual User? GymManagerNavigation { get; set; }

@@ -55,6 +55,8 @@ GymId int  Foreign Key References Gyms(GymId) Not null
 Create table Comments(
 CommentId int PRIMARY KEY IDENTITY,
 UserId int Foreign Key References Users(Id) Not null,
+GymId int Foreign Key References Gyms(GymId) Not null,
+[Date] DATETIME NOT NULL,
 [Rank] int Not null,
 [Description] Nvarchar(150) Not null);
     
@@ -66,6 +68,11 @@ Go
 
 ALTER ROLE db_owner ADD MEMBER [TaskAdminUser];
 Go
+--so user can restore the DB!
+ALTER SERVER ROLE sysadmin ADD MEMBER [TaskAdminLogin];
+Go
+
+INSERT INTO Users Values (N'dsd',N'Itamar12@sdsd.com',N'Itamar123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Begginer',2,1)
 
 INSERT INTO Users Values (N'Itamar1',N'Itamar12@gmail.com',N'Itamar123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Begginer',2,1)
 INSERT INTO Users Values(N'Admin',N'o@gmail.com',N'123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Expert',2,2)
