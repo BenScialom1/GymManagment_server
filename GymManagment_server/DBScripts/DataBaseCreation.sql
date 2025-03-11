@@ -72,8 +72,6 @@ Go
 ALTER SERVER ROLE sysadmin ADD MEMBER [TaskAdminLogin];
 Go
 
-INSERT INTO Users Values (N'dsd',N'Itamar12@sdsd.com',N'Itamar123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Begginer',2,1)
-
 INSERT INTO Users Values (N'Itamar1',N'Itamar12@gmail.com',N'Itamar123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Begginer',2,1)
 INSERT INTO Users Values(N'Admin',N'o@gmail.com',N'123','10-08-2007',N'Golda Meir 5 Hod Hasharon',N'Expert',2,2)
 INSERT INTO Gyms Values(N'Itamarfittnes',1,N'Golda Meir 5 Hod Hasharon',150,N'054131478',1)
