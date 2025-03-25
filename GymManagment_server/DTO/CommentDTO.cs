@@ -6,8 +6,8 @@ namespace GymManagment_server.DTO
     {
         public int CommentId { get; set; }
         public int UserId { get; set; }
+        public string Username { get; set; }  // Ensure this is included
         public int GymId { get; set; }
-        public string Username { get; set; } // Added to display the username in reviews
         public int Rank { get; set; }
         public string Description { get; set; }
         public DateTime CommentDate { get; set; }

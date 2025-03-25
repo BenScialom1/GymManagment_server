@@ -203,6 +203,7 @@ namespace GymManagment_server.Controllers
                 // Create a new comment
                 Models.Comment comment = new Comment()
                 {
+                    UserName = commentDTO.Username,
                     UserId = commentDTO.UserId,
                     GymId = commentDTO.GymId,
                     Rank = commentDTO.Rank,
