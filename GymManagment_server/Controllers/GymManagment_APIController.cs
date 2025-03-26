@@ -201,15 +201,7 @@ namespace GymManagment_server.Controllers
                 }
 
                 // Create a new comment
-                Models.Comment comment = new Comment()
-                {
-                    UserName = commentDTO.Username,
-                    UserId = commentDTO.UserId,
-                    GymId = commentDTO.GymId,
-                    Rank = commentDTO.Rank,
-                    Description = commentDTO.Description,
-                    Date = DateTime.Now
-                };
+                Models.Comment comment = commentDTO.GetModel();
 
                 // Add to database
                 context.Comments.Add(comment);
@@ -230,24 +222,17 @@ namespace GymManagment_server.Controllers
             try
             {
                 var comments = await context.Comments
+                    .Include(c => c.User)
                     .Where(c => c.GymId == gymId)
-                    .Join(context.Users,
-                          comment => comment.UserId,
-                          user => user.Id,
-                          (comment, user) => new CommentDTO
-                          {
-                              CommentId = comment.CommentId,
-                              UserId = comment.UserId,
-                              GymId = comment.GymId,
-                              Username = user.Username,
-                              Rank = comment.Rank,
-                              Description = comment.Description,
-                              CommentDate = comment.Date
-                          })
-                    .OrderByDescending(c => c.CommentDate)
+                    .OrderByDescending(c => c.Date)
                     .ToListAsync();
 
-                return Ok(comments);
+                List<CommentDTO> result = new List<CommentDTO>();
+                foreach (var comment in comments) 
+                {
+                    result.Add(new CommentDTO(comment));
+                }
+                return Ok(result);
             }
             catch (Exception ex)
             {

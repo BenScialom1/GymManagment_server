@@ -33,7 +33,7 @@ public partial class BenDBContext : DbContext
     {
         modelBuilder.Entity<Class>(entity =>
         {
-            entity.HasKey(e => e.ClassId).HasName("PK__Classes__CB1927C0F8E01139");
+            entity.HasKey(e => e.ClassId).HasName("PK__Classes__CB1927C0605E3F62");
 
             entity.HasOne(d => d.Gym).WithMany(p => p.Classes)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -42,7 +42,7 @@ public partial class BenDBContext : DbContext
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__Comments__C3B4DFCA843E34F1");
+            entity.HasKey(e => e.CommentId).HasName("PK__Comments__C3B4DFCA0A1E45A6");
 
             entity.HasOne(d => d.Gym).WithMany(p => p.Comments)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -55,14 +55,14 @@ public partial class BenDBContext : DbContext
 
         modelBuilder.Entity<Gym>(entity =>
         {
-            entity.HasKey(e => e.GymId).HasName("PK__Gyms__1A3A7C96B6E20CB6");
+            entity.HasKey(e => e.GymId).HasName("PK__Gyms__1A3A7C96607AB04B");
 
             entity.HasOne(d => d.GymManagerNavigation).WithMany(p => p.Gyms).HasConstraintName("FK__Gyms__GymManager__286302EC");
         });
 
         modelBuilder.Entity<Trainer>(entity =>
         {
-            entity.HasKey(e => e.TrainerId).HasName("PK__Trainers__366A1A7CAC258B6C");
+            entity.HasKey(e => e.TrainerId).HasName("PK__Trainers__366A1A7C73051D5A");
 
             entity.HasOne(d => d.Gym).WithMany(p => p.Trainers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -71,7 +71,7 @@ public partial class BenDBContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07C19A3874");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC071BD55B69");
         });
 
         OnModelCreatingPartial(modelBuilder);

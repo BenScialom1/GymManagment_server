@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymManagment_server.Models;
 
-[Index("Email", Name = "UQ__Users__A9D10534377887DA", IsUnique = true)]
+[Index("Email", Name = "UQ__Users__A9D105341604F3EC", IsUnique = true)]
 public partial class User
 {
     [StringLength(50)]

@@ -6,11 +6,11 @@ namespace GymManagment_server.DTO
     {
         public int CommentId { get; set; }
         public int UserId { get; set; }
-        public string Username { get; set; }  // Ensure this is included
         public int GymId { get; set; }
         public int Rank { get; set; }
         public string Description { get; set; }
         public DateTime CommentDate { get; set; }
+        public UserDTO? User { get; set; }
 
         public CommentDTO() { }
 
@@ -22,6 +22,22 @@ namespace GymManagment_server.DTO
             Rank = comment.Rank;
             Description = comment.Description;
             CommentDate = comment.Date;
+            if (comment.User != null) 
+            {
+                this.User = new UserDTO(comment.User);
+            }
+        }
+
+        public Comment GetModel()
+        {
+            return new Comment()
+            {
+                UserId = this.UserId,
+                GymId = this.GymId,
+                Rank = this.Rank,
+                Description = this.Description,
+                Date = DateTime.Now
+            };
         }
     }
 }
