@@ -367,6 +367,51 @@ namespace GymManagment_server.Controllers
 
             return false;
         }
+        [HttpPost("updateuser")]
+        public IActionResult UpdateUser([FromBody] DTO.UserDTO userDto)
+        {
+            try
+            {
+                // Check if user exists in the database
+                var user = context.Users.FirstOrDefault(u => u.Id == userDto.Id);
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                // Update the user properties
+                if (!string.IsNullOrEmpty(userDto.Username))
+                    user.Username = userDto.Username;
+
+                if (!string.IsNullOrEmpty(userDto.Email))
+                    user.Email = userDto.Email;
+
+                if (!string.IsNullOrEmpty(userDto.Address))
+                    user.Address = userDto.Address;
+
+                if (userDto.BirthDate.HasValue)
+                    user.BirthDate = userDto.BirthDate;
+
+                if (userDto.GenderId.HasValue)
+                    user.GenderId = userDto.GenderId;
+
+                if (!string.IsNullOrEmpty(userDto.Difficulty))
+                    user.Difficulty = userDto.Difficulty;
+
+                // Only update password if it's provided
+                if (!string.IsNullOrEmpty(userDto.Password))
+                    user.Password = userDto.Password;
+
+                // Save changes to the database
+                context.SaveChanges();
+
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         //Helper functions
         #region Backup / Restore
         [HttpGet("Backup")]
