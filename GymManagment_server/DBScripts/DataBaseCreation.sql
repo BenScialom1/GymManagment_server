@@ -81,6 +81,7 @@ INSERT INTO Gyms Values(N'Swift',3,N'Zalman Shazar 7 Hod Hasharon',200,N'0549312
 --insert into TRAINERS values(N'Ben',N'Ben is an excellent triner that specilice in yoga classes')
 --insert into CLASSES values(N'Zumba',2,N'Zumba class is an intermidiate class that is a lot of fun')
 SELECT*FROM Users
+SELECT*FROM Gyms
 SELECT*FROM Trainers
 
 --scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=GymManagment_server;User ID=TaskAdminLogin;Password=Petel123;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context BenDBContext -DataAnnotations -force

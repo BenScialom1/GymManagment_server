@@ -5,30 +5,30 @@ namespace GymManagment_server.DTO
     public class GymDTO
     {
         public string? Name { get; set; }
-
         [Key]
         public int GymId { get; set; }
-
         public int? Level { get; set; }
-
         [StringLength(100)]
         public string Address { get; set; } = null!;
-
         public int Price { get; set; }
-
         [StringLength(15)]
         public string PhoneNumber { get; set; } = null!;
-
         public int? GymManager { get; set; }
-        public GymDTO(Models.Gym gym) 
+
+        // Empty constructor needed for serialization/deserialization
+        public GymDTO()
         {
-            this.Name = Name;
-            this.GymId=GymId;
-            this.Level = Level;
-            this.Address = Address;
-            this.Price = Price;
-            this.PhoneNumber = PhoneNumber;
-            this.GymManager = GymManager;
+        }
+
+        public GymDTO(Models.Gym gym)
+        {
+            this.Name = gym.Name;
+            this.GymId = gym.GymId;
+            this.Level = gym.Level;
+            this.Address = gym.Address;
+            this.Price = gym.Price;
+            this.PhoneNumber = gym.PhoneNumber;
+            this.GymManager = gym.GymManager;
         }
     }
 }
