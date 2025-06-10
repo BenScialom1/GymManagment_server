@@ -28,7 +28,7 @@ namespace GymManagment_server.DTO
         public int? GenderId { get; set; }
 
         public bool IsManager { get; set; }
-
+        
         public UserDTO() { } 
         public UserDTO(Models.User user)
         {

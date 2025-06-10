@@ -41,7 +41,7 @@ namespace GymManagment_server.Controllers
                 HttpContext.Session.SetString("loggedInUser", modelsUser.Email);
 
                 DTO.UserDTO dtoUser = new DTO.UserDTO(modelsUser);
-
+                
                 return Ok(dtoUser);
             }
             catch (Exception ex)
@@ -327,7 +327,7 @@ namespace GymManagment_server.Controllers
         }
 
         //this function get profile image from the server
-        [HttpPost("GetImage")]
+        [HttpGet("GetImage")]
         public ActionResult GetImage([FromQuery] string userId)
         {
             string filePath = $"{this.webHostEnvironment.WebRootPath}\\profileImages\\{userId}.jpg";
